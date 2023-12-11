@@ -14,6 +14,7 @@ import FavoriteScreen from "../screens/FavoriteScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SearchScreen from "../screens/SearchScreen";
 import BeverageScreen from "../screens/BeverageScreen";
+import News from "../screens/News";
 
 
 const Stack = createNativeStackNavigator();
@@ -34,6 +35,7 @@ const AppNavigator = () => {
 				<Stack.Screen name="profile" component={ProfileScreen} />
 				<Stack.Screen name="Search" component={SearchScreen}/>
 				<Stack.Screen name="Beverage" component={BeverageScreen}/>
+				<Stack.Screen name="News" component={News}/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
