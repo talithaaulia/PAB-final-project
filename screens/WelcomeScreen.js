@@ -1,12 +1,9 @@
-// WelcomeScreen.js
-import React from 'react';
-import { Image } from 'react-native';
-import { NativeBaseProvider, ScrollView, Box, Text, Button, HStack } from 'native-base';
+import React, { useState } from 'react';
+import { Image, ScrollView } from 'react-native';
+import { NativeBaseProvider, Box, Text, Button,HStack} from 'native-base';
 
 const WelcomeScreen = ({ navigation }) => {
-  const handleStartCooking = () => {
-    navigation.navigate('RecipeList');
-  };
+  const [isLoggedIn,] = useState(false);
 
   const handleLogin = () => {
     navigation.navigate('login');
@@ -28,35 +25,33 @@ const WelcomeScreen = ({ navigation }) => {
     <NativeBaseProvider>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Box alignItems="center" p={4}>
-          <Image source={require('../assets/images/welcome1.png')} style={{ marginTop: 2 }} />
+          <Image source={require('../assets/images/welcome1.png')} mt={2} />
 
           <Text color="#f96163" fontSize={15} fontWeight="bold">
             Resep Mudah dengan Handphone
           </Text>
 
-          <Text fontSize="xl" fontWeight="bold" color="#3c444c" mt={30} mb={2}>
+          <Text fontSize="xl" fontWeight="bold" color="#3c444c" mt={30} mb={25}>
             Klik untuk memulai
           </Text>
 
-          <Button onPress={handleStartCooking} bg="#f96163" borderRadius={18} py={18} w="50%" alignItems="center" mb={4}>
+          <Button onPress={handleLogin} bg="#f96163" borderRadius={18} py={18} w="50%" alignItems="center" mb={4}>
             <Text fontSize={18} color="#fff" fontWeight="800">
-              Mulai Memasak
+              Login Disini
             </Text>
           </Button>
 
-          <Button onPress={handleLogin} variant="link">
-            <Text color="danger.500" fontSize="md">
-              Sudah punya akun? Login disini
-            </Text>
-          </Button>
+          {!isLoggedIn && (
+            <>
+              <Button onPress={handleSignUp} variant="link">
+              <Text color="danger.500" fontSize="md">
+                  Belum punya akun? Sign Up disini
+                </Text>
+              </Button>
+            </>
+          )}
 
-          <Button onPress={handleSignUp} variant="link">
-            <Text color="danger.500" fontSize="md">
-              Belum punya akun? Sign Up disini
-            </Text>
-          </Button>
-
-          <HStack>
+<HStack>
             <Button onPress={handleTentangKami} variant="link">
               <Text color="danger.500" fontSize="md">
                 About Us
@@ -69,6 +64,8 @@ const WelcomeScreen = ({ navigation }) => {
               </Text>
             </Button>
           </HStack>
+
+
         </Box>
       </ScrollView>
     </NativeBaseProvider>

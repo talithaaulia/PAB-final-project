@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import CategoriesFilter from "../components/CategoriesFilter";
 import Header from "../components/Header";
 import RecipeCard from "../components/RecipeCard";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 const RecipeListScreen = () => {
@@ -20,15 +21,19 @@ const RecipeListScreen = () => {
 				<Header headerText={"AYO MEMASAK "} headerIcon={"bell-o"} />
 
 			{/* Search Filter */}
-			<Box mb={300} mt={5} bg="rose.500" borderRadius={50} >
+			<Box mb={300} mt={5} p={1} bg="#f96163" borderRadius={10} flexDirection="row" alignItems="center">
 				<TouchableOpacity onPress={handleSearchBarClick}>
-					<Text 
-						textAlign="center" 
-						fontSize="lg" 
-						color="white"
-					>
-						mau cari resep apa? klik disini
-					</Text>
+					<Box flexDirection="row" alignItems="center">
+					 <Icon name="search" size={20} color="white" marginLeft={15} />
+						<Text 
+							textAlign="center" 
+							fontSize="lg" 
+							color="white"
+							marginLeft={10}
+						>
+							mau cari resep apa? klik disini
+						</Text>
+					</Box>
 				</TouchableOpacity>
 			</Box>
 
