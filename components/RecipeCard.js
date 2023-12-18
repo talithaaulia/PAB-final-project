@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FlatList, Pressable } from "react-native";
 import { Box, Text, Image } from "native-base";
+
 import { useNavigation } from "@react-navigation/native";
 import { colors, recipeList } from "../Constant";
 import StarRating from "../screens/StarRating";
@@ -50,8 +51,10 @@ const RecipeCard = () => {
         <Text> | </Text>
         <StarRating rating={item.rating} onStarPress={(newRating) => handleStarPress(item.id, newRating)} />
       </Box>
+      <Text>{/* Tampilkan ulasan di sini */}</Text>
     </Pressable>
   );
+  
 
   return (
     <FlatList

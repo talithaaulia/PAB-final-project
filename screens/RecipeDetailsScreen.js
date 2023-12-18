@@ -50,7 +50,7 @@ const RecipeDetailsScreen = ({ navigation, route }) => {
               <Icon as={FontAwesome} 
                 name={isHeartRed ? "heart" : "heart-o"} 
                 size="28" 
-                color={isHeartRed ? "white" : "white"} />
+                color={isHeartRed ? "black" : "white"} />
             </Animated.View>
           </Pressable>
         </HStack>

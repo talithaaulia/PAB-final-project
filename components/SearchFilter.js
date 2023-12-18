@@ -10,8 +10,8 @@ const SearchFilter = ({ icon, placeholder, onSearch }) => {
   };
 
   const handleClear = () => {
-    setSearchQuery('');
-    onSearch('');
+    setSearchQuery("");
+    onSearch("");
   };
 
   return (
