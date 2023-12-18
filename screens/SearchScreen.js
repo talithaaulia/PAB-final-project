@@ -23,13 +23,13 @@ const SearchScreen = () => {
       <Box flex={1} mx={18}>
        <HStack flexDirection="row" mt={10}>
           <Pressable flex={1} onPress={() => navigation.goBack()}>
-            <Icon as={FontAwesome} name="arrow-circle-left" size="28" color="rose.500" />
+            <Icon as={FontAwesome} name="arrow-circle-left" size="28" color="rose.500" top={5}/>
           </Pressable>
       </HStack>
-      <Header headerText={"AYO MEMASAK "} headerIcon={"bell-o"} />
+      <Header headerText={"AYO MEMASAK"} headerIcon={"bell-o"}/>
 
         {/* Search Filter */}
-        <Box>
+        <Box mb={660}>
             <SearchFilter 
             icon="search"
             placeholder={"mau masak apa hari ini? ketik disini..."}
@@ -43,7 +43,7 @@ const SearchScreen = () => {
             renderItem={({ item }) => (
                 <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('RecipeDetail', { item });
+                    navigation.navigate("RecipeDetail", { item });
                 }}
                 >
                     <Text mr={5} my={2} color="rose.500">

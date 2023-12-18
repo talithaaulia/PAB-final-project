@@ -18,11 +18,20 @@ const RecipeDetailsInfo = ({ item }) => {
             <Pressable
               onPress={() =>
                 toggleModal(
-                  <Box>
+                  <Box p={4} bg="white" borderRadius="xl">
                     <Text fontSize="2xl" fontWeight="bold" mb={2} textAlign="center">
                       Time
                     </Text>
                     <Text fontSize="lg" textAlign="center">{item.time} minutes</Text>
+
+                    {/* Additional Details for Cooking Process Time */}
+                    <Text fontSize="md" color="gray.500" mt={2} textAlign="center">
+                      {item.time <= 15
+                        ? "Quick and Easy"
+                        : item.time <= 30
+                        ? "Moderate Time"
+                        : "Hidangan akan siap"}
+                    </Text>
                   </Box>
                 )
               }
@@ -35,7 +44,7 @@ const RecipeDetailsInfo = ({ item }) => {
                 alignItems="center"
                 w="100"
               >
-                <Text fontSize="4xl">⏰</Text>
+                <Text fontSize="4xl">⌚</Text>
                 <Text fontSize="lg" fontWeight={200}>
                   {item.time}
                 </Text>
@@ -45,7 +54,7 @@ const RecipeDetailsInfo = ({ item }) => {
             <Pressable
               onPress={() =>
                 toggleModal(
-                  <Box>
+                  <Box p={4} bg="white" borderRadius="xl">
                     <Text fontSize="2xl" fontWeight="bold" mb={2} textAlign="center">
                       Difficulty
                     </Text>
@@ -72,11 +81,16 @@ const RecipeDetailsInfo = ({ item }) => {
             <Pressable
               onPress={() =>
                 toggleModal(
-                  <Box>
+                  <Box p={4} bg="white" borderRadius="xl">
                     <Text fontSize="2xl" fontWeight="bold" mb={2} textAlign="center">
                       Calories
                     </Text>
-                    <Text fontSize="lg" textAlign="center">{item.calories}</Text>
+                    <Text fontSize="lg" textAlign="center">{item.calories} kcal</Text>
+
+                    {/* Additional Details for Nutritional Information */}
+                    <Text fontSize="md" color="gray.500" mt={2} textAlign="center">
+                      Protein: {item.proteinPercentage}%, Carbohydrates: {item.carbPercentage}%
+                    </Text>
                   </Box>
                 )
               }

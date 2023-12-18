@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { 
   NativeBaseProvider, HStack, Pressable, 
-  Icon, Box, Text, Button, 
-  Input, VStack, Radio
+  Icon, Box, Text, Button, Input, Modal, 
+  Alert, AlertText, VStack, Radio
 } from 'native-base';
 import { FontAwesome } from "@expo/vector-icons";
 import FIREBASE from '../config';
@@ -12,19 +12,37 @@ const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState("");
+  // const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
+  // const [errorModalMessage, setErrorModalMessage] = useState("");
 
   const handleSignUp = async () => {
     try {
       const userCredential = await FIREBASE.auth().createUserWithEmailAndPassword(email, password);
       const user = userCredential.user;
-      console.log('User registered successfully!', user);
+
+      await FIREBASE.firestore().collection("users").doc(user.uid).set({
+        fullName,
+        email,
+        gender,
+      });
+
+      console.log("User registered successfully!", user);
       navigation.navigate('login');
     } catch (error) {
-      console.error('Sign up failed.', error.message);
-      toggleAlert(error.message);
+      console.error("Sign up failed.", error.message);
+      showErrorModal(error.message);
       // Handle sign-up error (show an error message, etc.)
     }
   };
+
+  // const showErrorModal = (message) => {
+  //   setErrorModalMessage(message);
+  //   setIsErrorModalVisible(true);
+  // };
+
+  // const closeErrorModal = () => {
+  //   setIsErrorModalVisible(false);
+  // };
 
   return (
     <NativeBaseProvider>
@@ -94,6 +112,13 @@ const SignUpScreen = ({ navigation }) => {
               <Text color="#f96163" textAlign="center">Sign Up</Text>
             </Button>
           </Box>
+          
+          {/* <Modal isOpen={isErrorModalVisible} onClose={closeErrorModal}>
+          <Alert mx="$4" action="error" variant="solid">
+            <AlertText fontWeight="$bold">Error!</AlertText>
+            <AlertText>{errorModalMessage}</AlertText>
+          </Alert>
+        </Modal> */}
       </Box>
     </NativeBaseProvider>
   );

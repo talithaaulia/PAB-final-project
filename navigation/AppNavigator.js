@@ -15,6 +15,15 @@ import ProfileScreen from "../screens/ProfileScreen";
 import SearchScreen from "../screens/SearchScreen";
 import BeverageScreen from "../screens/BeverageScreen";
 import News from "../screens/News";
+import list from "../screens/list";
+import RecipeForm from "../screens/RecipeForm";
+import SplashScreen from "../screens/splash";
+import ReviewScreen from "../screens/review";
+
+
+
+
+
 
 
 const Stack = createNativeStackNavigator();
@@ -22,6 +31,7 @@ const AppNavigator = () => {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
+			<Stack.Screen name="Splash" component={SplashScreen} />
 				<Stack.Screen name="Welcome" component={WelcomeScreen} />
 				<Stack.Screen name="RecipeList" component={RecipeListScreen} />
 				<Stack.Screen name="RecipeDetail" component={RecipeDetailsScreen} />
@@ -36,6 +46,9 @@ const AppNavigator = () => {
 				<Stack.Screen name="Search" component={SearchScreen}/>
 				<Stack.Screen name="Beverage" component={BeverageScreen}/>
 				<Stack.Screen name="News" component={News}/>
+				<Stack.Screen name="list" component={list}/>
+				<Stack.Screen name="RecipeForm" component={RecipeForm}/>
+				<Stack.Screen name="ReviewScreen" component={ReviewScreen}/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

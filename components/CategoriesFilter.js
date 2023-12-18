@@ -18,12 +18,9 @@ const CategoriesFilter = () => {
   ];
 
   const handleCategoryPress = (category) => {
-    if (category === 'minuman') {
-      // Navigate to the Beverage screen
-      navigation.navigate('Beverage'); // Replace 'Beverage' with the actual screen name
-    } else {
-      // Handle other categories or navigate to other screens accordingly
-    }
+    if (category === "minuman") {
+      navigation.navigate("Beverage"); 
+    } 
   };
 
   return (
@@ -37,11 +34,11 @@ const CategoriesFilter = () => {
             p={4}
             my={5}
             mr={5}
-            bg={category.id === '01' ? '#f96163' : '#fff'}
+            bg={category.id === "01" ? "#f96163" : "#fff"}
             borderRadius={10}
          >
             <Text fontSize="lg" 
-              color={category.id === '01' ? '#fff' : '#000'}>
+              color={category.id === "01" ? "#fff" : "#000"}>
               {category.category}
             </Text>
           </Box>

@@ -1,28 +1,23 @@
-import React from "react";
-import { FontAwesome } from "@expo/vector-icons";
+import React from 'react';
+import { View, TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const StarRating = ({ rating, onStarPress }) => {
-  const renderStars = () => {
-    const stars = [];
-    const maxRating = 5;
+  const navigation = useNavigation();
 
-    for (let i = 1; i <= maxRating; i++) {
-      stars.push(
-        <FontAwesome
-          key={i}
-          name={i <= rating ? "star" : "star-o"}
-          size={20}
-          color={i <= rating ? "#f39c12" : "#ccc"}
-          style={{ marginHorizontal: 2 }}
-          onPress={() => onStarPress(i)}
-        />
-      );
-    }
-
-    return stars;
+  const handleStarPress = () => {
+    // Navigasi ke screen review saat ikon bintang ditekan
+    navigation.navigate('ReviewScreen');
   };
 
-  return <>{renderStars()}</>;
+  return (
+    <View>
+      <TouchableOpacity onPress={handleStarPress}>
+        <FontAwesome name="star" size={24} color="orange" />
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 export default StarRating;
