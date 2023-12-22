@@ -1,102 +1,84 @@
-import React, { useState } from "react";
-import { Animated, Image, Pressable } from "react-native";
-import { NativeBaseProvider, Box, HStack, Icon, Text } from "native-base";
-import { FontAwesome } from "@expo/vector-icons";
+import React from "react";
+import { SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
+import { Box, NativeBaseProvider, Text } from "native-base";
+import { useNavigation } from "@react-navigation/native";
+import CategoriesFilter from "../components/CategoriesFilter";
+import Header from "../components/Header";
+import RecipeCard from "../components/RecipeCard";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const BeverageScreen = ({ navigation }) => {
-  const [isHeartRed, setIsHeartRed] = useState(false);
-  const [animation] = useState(new Animated.Value(1));
+const RecipeListScreen = () => {
+  const navigation = useNavigation();
+  const [recipes, setRecipes] = React.useState([]);
 
-  const ingredients = [
-    "cincau & dawet",
-    "santan",
-    "gula merah",
-    "es batu",
-  ];
-
-  const steps = [
-    "1) Rebus gula merah sampai larut lalu saring",
-    "2) Kemudian rebus santan dengan ditambah sedikit air dan garam",
-    "3) Terakhir tata dalam gelas, es batu, cincau hitam, dawet, tape, dan siram dengan gula serta santan. Sajikan"
-  ];
-
-  const toggleHeartColor = () => {
-    setIsHeartRed(!isHeartRed);
-
-    Animated.sequence([
-      Animated.timing(animation, {
-        toValue: 1.2,
-        duration: 100,
-        useNativeDriver: true,
-      }),
-      Animated.spring(animation, {
-        toValue: 1,
-        friction: 3,
-        tension: 40,
-        useNativeDriver: true,
-      }),
-    ]).start();
+  const handleSearchBarClick = () => {
+    navigation.navigate("Search");
   };
 
-  const animatedStyle = {
-    transform: [{ scale: animation }],
-  };
+  React.useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const response = await fetch('https://api.edamam.com/api/recipes/v2?type=public&q=drink&app_id=9631526f&app_key=d26b50691432dfec98de8de1a0f1eeb7');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
 
+        const data = await response.json();
+        setRecipes(data.hits);
+      } catch (error) {
+        console.error('Error fetching recipes:', error);
+      }
+    };
+
+    fetchRecipes();
+  }, [])
 
   return (
     <NativeBaseProvider>
-      <Box bg="yellow.500" flex={1}>
-        <HStack flexDirection="row" mt={10} marginX={6}>
-          <Pressable flex={1} onPress={() => navigation.goBack()}>
-            <Icon as={FontAwesome} name="arrow-circle-left" size="28" color="white" />
-          </Pressable>
-          <Pressable onPress={toggleHeartColor}>
-            <Animated.View style={[animatedStyle]}>
-              <Icon as={FontAwesome} name={isHeartRed ? "heart" : "heart-o"} size="28" color={isHeartRed ? "black" : "white"} />
-            </Animated.View>
-          </Pressable>
-        </HStack>
+      <SafeAreaView flex={1} marginHorizontal={18}>
+        {/* render header */}
+        <Header headerText={"AYO MEMASAK "} headerIcon={"bell-o"} />
 
-        <Box bg="#fff" flex={1} mt={140} borderTopLeftRadius={56} borderTopRightRadius={56} alignItems="center" paddingX={6}>
-          <Box h="300" w="300" position="absolute" top="-150">
-            <Image source={require('../assets/images/cendol.png')} alt="Cendol" 
-              style={{ width: "100%", height: "100%", resizeMode: "contain" }} 
-            />
-          </Box>
-
-          <Text mt={150} fontSize={28} fontWeight="bold">
-            Es Cendol Dawet
-          </Text>
-
-          <Box flex={1}>
-              <Box my={12} mr={250}>
-                <Text fontSize="lg" fontWeight="600" mb={3}>
-                  Ingredients:
-                </Text>
-
-                {ingredients.map((ingredient, index) => (
-                  <Text fontSize={18} key={index}>
-                    {ingredient}
-                  </Text>
-                ))}
-              </Box>
-
-              <Box my={2} alignSelf="flex-start">
-                <Text fontSize="lg" fontWeight="600" mb={4}>
-                  Steps:
-                </Text>
-
-                {steps.map((step, index) => (
-                  <Text fontSize={18} key={index}>
-                    {step}
-                  </Text>
-                ))}
-              </Box>
-          </Box>
+        {/* Search Filter */}
+        <Box mb={300} mt={-350} p={1} bg="#f96163" borderRadius={10} flexDirection="row" alignItems="center">
+          <TouchableOpacity onPress={handleSearchBarClick}>
+            <Box flexDirection="row" alignItems="center">
+              <Icon name="search" size={20} color="white" marginLeft={17} />
+              <Text textAlign="center" fontSize="lg" color="white" marginLeft={6}>
+                mau cari resep apa? klik disini
+              </Text>
+            </Box>
+          </TouchableOpacity>
         </Box>
-      </Box>
+
+        {/* Categories filter */}
+        <Box mt={-270}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <Box>
+              <Text fontSize={22} fontWeight="bold">
+                Categories
+              </Text>
+              {/* Categories list */}
+              <CategoriesFilter />
+            </Box>
+          </ScrollView>
+        </Box>
+
+        {/* Recipe List Filter */}
+        <Box flex={1} mt={5}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <Box>
+              <Text fontSize={22} fontWeight="bold">
+                Recipes
+              </Text>
+              {/* Recipes list */}
+              <RecipeCard recipes={recipes} />
+            </Box>
+          </ScrollView>
+        </Box>
+      </SafeAreaView>
     </NativeBaseProvider>
   );
 };
 
-export default BeverageScreen;
+export default RecipeListScreen;

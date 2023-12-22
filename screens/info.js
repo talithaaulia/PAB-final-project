@@ -86,11 +86,6 @@ const RecipeDetailsInfo = ({ item }) => {
                       Calories
                     </Text>
                     <Text fontSize="lg" textAlign="center">{item.calories} kcal</Text>
-
-                    {/* Additional Details for Nutritional Information */}
-                    <Text fontSize="md" color="gray.500" mt={2} textAlign="center">
-                      Protein: {item.proteinPercentage}%, Carbohydrates: {item.carbPercentage}%
-                    </Text>
                   </Box>
                 )
               }

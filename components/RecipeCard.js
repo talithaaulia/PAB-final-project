@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FlatList, Pressable } from "react-native";
 import { Box, Text, Image } from "native-base";
-
 import { useNavigation } from "@react-navigation/native";
-import { colors, recipeList } from "../Constant";
 import StarRating from "../screens/StarRating";
 
-const RecipeCard = () => {
+const RecipeCard = ({ recipes }) => {
   const navigation = useNavigation();
-  const [recipeListState, setRecipeListState] = useState(recipeList);
+  const [recipeListState, setRecipeListState] = useState([]);
 
   const handleStarPress = (recipeId, newRating) => {
     const updatedRecipeList = updateRecipeRating(recipeId, newRating);
@@ -24,11 +22,17 @@ const RecipeCard = () => {
     });
   };
 
+  useEffect(() => {
+    console.log("lala");
+    console.log(recipes);
+    setRecipeListState(recipes); // Inisialisasi state dengan data resep
+  }, [recipes]);
+
   const renderItem = ({ item }) => (
     <Pressable
       onPress={() => navigation.navigate("RecipeDetail", { item: item })}
       style={{
-        backgroundColor: colors.COLOR_LIGHT,
+        backgroundColor: "#f4f4f4",
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.1,
@@ -41,20 +45,19 @@ const RecipeCard = () => {
       }}
     >
       <Image
-        source={item.image}
-        alt={item.name}
-        style={{ width: 150, height: 150, resizeMode: "center" }}
+        source={{ uri: item.recipe.image }}
+        style={{ width: 150, height: 150, resizeMode: "cover" }}
       />
-      <Text>{item.name}</Text>
+      <Text>{item.recipe.label}</Text>
       <Box flexDirection="row" marginTop={8}>
-        <Text>{item.time}</Text>
-        <Text> | </Text>
-        <StarRating rating={item.rating} onStarPress={(newRating) => handleStarPress(item.id, newRating)} />
+        <StarRating
+          rating={item.recipe.yield}
+          onStarPress={(newRating) => handleStarPress(item.id, newRating)}
+        />
       </Box>
       <Text>{/* Tampilkan ulasan di sini */}</Text>
     </Pressable>
   );
-  
 
   return (
     <FlatList

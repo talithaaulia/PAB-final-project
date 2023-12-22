@@ -1,9 +1,11 @@
-import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import React, { useState } from 'react';
+import { TouchableOpacity, FlatList } from 'react-native';
+import { Box, Text } from "native-base";
 import { useNavigation } from '@react-navigation/native';
 
 const CategoriesFilter = () => {
   const navigation = useNavigation();
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const categories = [
     {
@@ -17,31 +19,43 @@ const CategoriesFilter = () => {
   ];
 
   const handleCategoryPress = (category) => {
-    if (category === 'minuman') {
+    setSelectedCategory(category);
+
+    if (category === 'makanan') {
+      // Navigate to the RecipeListScreen
+      navigation.navigate('RecipeList'); // Replace 'RecipeList' with the actual screen name for recipes
+    } else if (category === 'minuman') {
       // Navigate to the Beverage screen
       navigation.navigate('Beverage'); // Replace 'Beverage' with the actual screen name
-    } else {
-      // Handle other categories or navigate to other screens accordingly
     }
   };
 
+  const renderCategoryItem = ({ item }) => (
+    <TouchableOpacity
+      onPress={() => handleCategoryPress(item.category)}
+    >
+      <Box
+        p={4}
+        my={5}
+        mr={5}
+        bg={selectedCategory === item.category ? '#f96163' : '#fff'}
+        borderRadius={10}
+      >
+        <Text fontSize="lg" color={selectedCategory === item.category ? '#fff' : '#000'}>
+          {item.category}
+        </Text>
+      </Box>
+    </TouchableOpacity>
+  );
+
   return (
-    <>
-      {categories.map((category) => (
-        <TouchableOpacity
-          key={category.id}
-          onPress={() => handleCategoryPress(category.category)}
-          style={{
-            padding: 10,
-            margin: 5,
-            backgroundColor: category.id === '01' ? '#f96163' : '#fff',
-            borderRadius: 5,
-          }}
-        >
-          <Text>{category.category}</Text>
-        </TouchableOpacity>
-      ))}
-    </>
+    <FlatList
+      data={categories}
+      keyExtractor={(item) => item.id}
+      renderItem={renderCategoryItem}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+    />
   );
 };
 
