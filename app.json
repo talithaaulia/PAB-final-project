@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "Resep",
-    "slug": "Resep",
+    "name": "Enakeun",
+    "slug": "Enakeun",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/splashimage.jpg",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/splashimage.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
