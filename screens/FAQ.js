@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { 
-  NativeBaseProvider, Box, HStack, 
-  Pressable, Icon, Text, Column, elevation, Button
-} from "native-base";
+import {NativeBaseProvider, Box, Pressable, Icon, Text, Button} from "native-base";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from '@expo/vector-icons';
-import { TouchableOpacity, View } from "react-native";
+
 
 const FAQ = ({navigation}) => {
 
@@ -28,113 +25,113 @@ const FAQ = ({navigation}) => {
       </Box>
         
       <Box style={{flex: 1}}>
-        <TouchableOpacity style={{height:50, weight: 50, 
+        <Pressable style={{height:50, weight: 50, 
           backgroundColor: "#ffffff", elevation: 4, 
           borderRadius: 5, p: 10, paddingVertical: 10, 
           paddingHorizontal: 30, marginHorizontal: 15, flexDirection: 'row'}} 
           onPress={()=> setshowFAQ(!showFAQ)} >
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Box style={{justifyContent: 'center', alignItems: 'center'}}>
         <Text style={{ fontSize: 16, color:"#ec685f", fontWeight: "bold"}}>
           Apakah aplikasi juga tersedia web version?
         </Text>
-        </View>
+        </Box>
 
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Box style={{justifyContent: 'center', alignItems: 'center'}}>
         <MaterialIcons name="arrow-drop-down-circle" size={24} color="#ec685f" />
-        </View>
-        </TouchableOpacity>
+        </Box>
+        </Pressable>
       {showFAQ && (
-          <View style={{marginHorizontal: 20, backgroundColor: "#ec685f",p: 2, elevation: 10,
+          <Box style={{marginHorizontal: 20, backgroundColor: "#ec685f",p: 2, elevation: 10,
               paddingVertical: 10, paddingHorizontal: 10, borderBottomLeftRadius: 6, borderBottomRightRadius: 6}}>
           <Text style={{color: "#ffffff"}}>
             Hai, teman masak!😁 Sayangnya aplikasi belum dibuat dalam versi web yaa. Tapi tidak menutup kemungkinan 
             bahwa developer akan mempertimbangkan hal tersebut! Jadi tolong terus dukung kami yaa😉
           </Text>
-        </View>
+        </Box>
         )
       } 
       </Box>
 
       <Box style={{flex: 1}}>
-        <TouchableOpacity style={{height:50, weight: 50, 
+        <Pressable style={{height:50, weight: 50, 
           backgroundColor: "#ffffff", elevation: 4, 
           borderRadius: 5, p: 10, paddingVertical: 10, 
           paddingHorizontal: 30, marginHorizontal: 15, flexDirection: 'row'}} 
           onPress={()=> setshowFAQ(!showFAQ)} >
-        <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+        <Box style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
         <Text style={{ fontSize: 16, color:"#ec685f", fontWeight: "bold"}}>
           Bagaimana cara menghubungi admin?
         </Text>
-        </View>
+        </Box>
 
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Box style={{justifyContent: 'center', alignItems: 'center'}}>
         <MaterialIcons name="arrow-drop-down-circle" size={24} color="#ec685f" />
-        </View>
-        </TouchableOpacity>
+        </Box>
+        </Pressable>
       {showFAQ && (
         <Button onPress={gotoAbtus} variant="link" marginTop={0}>
-        <View style={{marginHorizontal: 20, backgroundColor: "#ec685f",p: 2, elevation: 10,
+        <Box style={{marginHorizontal: 20, backgroundColor: "#ec685f",p: 2, elevation: 10,
               paddingVertical: 10, paddingHorizontal: 10, borderBottomLeftRadius: 6, 
               borderBottomRightRadius: 6}}>
           <Text style={{color: "#ffffff"}}>
             Kamu bisa menghubungi admin melalui beberapa sosial media disini! [klik disini]
           </Text>
-        </View>
+        </Box>
         </Button>
         )
       } 
       </Box>
 
       <Box style={{flex: 1}}>
-        <TouchableOpacity style={{height:50, weight: 50, 
+        <Pressable style={{height:50, weight: 50, 
           backgroundColor: "#ffffff", elevation: 4, 
           borderRadius: 5, p: 10, paddingVertical: 10, 
           paddingHorizontal: 30, marginHorizontal: 15, flexDirection: 'row'}} 
           onPress={()=> setshowFAQ(!showFAQ)} >
-        <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+        <Box style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
         <Text style={{ fontSize: 16, color:"#ec685f", fontWeight: "bold"}}>
           Apa saja fitur yang ada di aplikasi ini?
         </Text>
-        </View>
+        </Box>
 
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Box style={{justifyContent: 'center', alignItems: 'center'}}>
         <MaterialIcons name="arrow-drop-down-circle" size={24} color="#ec685f" />
-        </View>
-        </TouchableOpacity>
+        </Box>
+        </Pressable>
       {showFAQ && (
-          <View style={{marginHorizontal: 20, backgroundColor: "#ec685f",p: 2, elevation: 10,
+          <Box style={{marginHorizontal: 20, backgroundColor: "#ec685f",p: 2, elevation: 10,
               paddingVertical: 10, paddingHorizontal: 10, borderBottomLeftRadius: 6, borderBottomRightRadius: 6}}>
           <Text style={{color: "#ffffff"}}>
             Aplikasi ini masih dalam tahap pengembangan😇
           </Text>
-        </View>
+        </Box>
         )
       } 
       </Box>
 
       <Box style={{flex: 1}}>
-        <TouchableOpacity style={{height:50, weight: 50, 
+        <Pressable style={{height:50, weight: 50, 
           backgroundColor: "#ffffff", elevation: 4, 
           borderRadius: 5, p: 10, paddingVertical: 10, 
           paddingHorizontal: 30, marginHorizontal: 15, flexDirection: 'row'}} 
           onPress={()=> setshowFAQ(!showFAQ)} >
-        <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+        <Box style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
         <Text style={{ fontSize: 16, color:"#ec685f", fontWeight: "bold"}}>
           Apakah aplikasi ini free?
         </Text>
-        </View>
+        </Box>
 
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Box style={{justifyContent: 'center', alignItems: 'center'}}>
         <MaterialIcons name="arrow-drop-down-circle" size={24} color="#ec685f" />
-        </View>
-        </TouchableOpacity>
+        </Box>
+        </Pressable>
       {showFAQ && (
-          <View style={{marginHorizontal: 20, backgroundColor: "#ec685f",p: 2, elevation: 10,
+          <Box style={{marginHorizontal: 20, backgroundColor: "#ec685f",p: 2, elevation: 10,
               paddingVertical: 10, paddingHorizontal: 10, borderBottomLeftRadius: 6, borderBottomRightRadius: 6}}>
           <Text style={{color: "#ffffff"}}>
             Kamu bisa mengakses aplikasi dan menggunakan fitur-fitur di dalamnya dengan gratis!😬 
           </Text>
-        </View>
+        </Box>
         )
       } 
       </Box>

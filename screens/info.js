@@ -20,69 +20,6 @@ const RecipeDetailsInfo = ({ item }) => {
                 toggleModal(
                   <Box p={4} bg="white" borderRadius="xl">
                     <Text fontSize="2xl" fontWeight="bold" mb={2} textAlign="center">
-                      Time
-                    </Text>
-                    <Text fontSize="lg" textAlign="center">{item.time} minutes</Text>
-
-                    {/* Additional Details for Cooking Process Time */}
-                    <Text fontSize="md" color="gray.500" mt={2} textAlign="center">
-                      {item.time <= 15
-                        ? "Quick and Easy"
-                        : item.time <= 30
-                        ? "Moderate Time"
-                        : "Hidangan akan siap"}
-                    </Text>
-                  </Box>
-                )
-              }
-              android_ripple={{ color: "rgba(255, 0, 0, 0.5)" }}
-            >
-              <Box
-                backgroundColor="rgba(255, 0, 0, 0.38)"
-                py={5}
-                borderRadius="2xl"
-                alignItems="center"
-                w="100"
-              >
-                <Text fontSize="4xl">⌚</Text>
-                <Text fontSize="lg" fontWeight={200}>
-                  {item.time}
-                </Text>
-              </Box>
-            </Pressable>
-
-            <Pressable
-              onPress={() =>
-                toggleModal(
-                  <Box p={4} bg="white" borderRadius="xl">
-                    <Text fontSize="2xl" fontWeight="bold" mb={2} textAlign="center">
-                      Difficulty
-                    </Text>
-                    <Text fontSize="lg" textAlign="center">{item.difficulty}</Text>
-                  </Box>
-                )
-              }
-              android_ripple={{ color: "rgba(135, 206, 235, 0.5)" }}
-            >
-              <Box
-                bg="rgba(135, 206, 235, 0.8)"
-                py={5}
-                borderRadius="2xl"
-                alignItems="center"
-                w="100"
-              >
-                <Text fontSize="4xl">🥣</Text>
-                <Text fontSize="lg" fontWeight={200}>
-                  {item.difficulty}
-                </Text>
-              </Box>
-            </Pressable>
-
-            <Pressable
-              onPress={() =>
-                toggleModal(
-                  <Box p={4} bg="white" borderRadius="xl">
-                    <Text fontSize="2xl" fontWeight="bold" mb={2} textAlign="center">
                       Calories
                     </Text>
                     <Text fontSize="lg" textAlign="center">{item.calories} kcal</Text>
