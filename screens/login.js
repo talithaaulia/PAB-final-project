@@ -11,7 +11,7 @@ const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignUp = () => { 
+  const handleSignUp = () => {
     navigation.navigate('signup');
   };
 
@@ -19,10 +19,9 @@ const LoginScreen = ({ navigation }) => {
     try {
       const response = await FIREBASE.auth().signInWithEmailAndPassword(username, password);
       console.log('User signed in successfully!', response.user);
-      navigation.navigate("RecipeList");
+      navigation.navigate("profile");
     } catch (error) {
       console.error('Login failed.', error);
-      // Handle login error (show an error message, etc.)
     }
   };
   
@@ -33,7 +32,7 @@ const LoginScreen = ({ navigation }) => {
       <HStack flexDirection="row" marginX={6}>
         <Pressable           
           position="absolute"
-          bottom={150}
+          bottom={160}
           right={150}
           onPress={() => navigation.goBack()}
         >

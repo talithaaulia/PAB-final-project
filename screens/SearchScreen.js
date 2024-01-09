@@ -1,21 +1,37 @@
 import React, { useState } from "react";
-import { TouchableOpacity } from "react-native";
 import { Box, FlatList, NativeBaseProvider, Text, HStack, Icon, Pressable } from "native-base";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Header from "../components/Header";
 import SearchFilter from "../components/SearchFilter";
-import { recipeList } from "../Constant";
 
 const SearchScreen = () => {
   const navigation = useNavigation();
   const [filteredData, setFilteredData] = useState([]);
 
-  const handleSearch = (query) => {
-    const filtered = recipeList.filter((item) =>
-      item.name.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredData(filtered);
+  const handleSearch = async (query) => {
+    try {
+      const response = await fetch(
+        `https://api.edamam.com/search?q=${query}&app_id=${`9631526f`}&app_key=${`d26b50691432dfec98de8de1a0f1eeb7`}`
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+
+      // Dapatkan resep dari data API
+      const recipes = data.hits.map((hit) => ({
+        id: hit.recipe.uri,
+        name: hit.recipe.label,
+        recipe: hit.recipe, 
+      }));
+
+      setFilteredData(recipes);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   return (
@@ -31,26 +47,27 @@ const SearchScreen = () => {
         {/* Search Filter */}
         <Box mb={660}>
             <SearchFilter 
-            icon="search"
-            placeholder={"mau masak apa hari ini? ketik disini..."}
-            onSearch={handleSearch}
+              position="fixed"
+              icon="search"
+              placeholder={"mau masak apa hari ini? ketik disini..."}
+              onSearch={handleSearch}
             />
 
             {/* Display filtered results */}
             <FlatList ml={50} 
-            data={filteredData}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-                <TouchableOpacity
-                onPress={() => {
+              data={filteredData}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => (
+                <Pressable
+                  onPress={() => {
                     navigation.navigate("RecipeDetail", { item });
-                }}
+                  }}
                 >
                     <Text mr={5} my={2} color="rose.500">
                         {item.name}
                     </Text>
-                </TouchableOpacity>
-            )}
+                </Pressable>
+              )}
             />
         </Box>
       </Box>
