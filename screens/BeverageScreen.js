@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
+import { SafeAreaView, TouchableOpacity } from "react-native";
 import { Box, NativeBaseProvider, Text } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import CategoriesFilter from "../components/CategoriesFilter";
@@ -12,26 +12,33 @@ const RecipeListScreen = () => {
   const [recipes, setRecipes] = React.useState([]);
 
   const handleSearchBarClick = () => {
-    navigation.navigate("Search");
+    navigation.navigate("Search"); // Navigate to the new SearchScreen
   };
 
-  React.useEffect(() => {
+  const handleReviewButtonClick = () => {
+    navigation.navigate("StarRating"); // Navigate to the StarRatingScreen
+  };
+
+  React.useEffect(()=>{
     const fetchRecipes = async () => {
       try {
-        const response = await fetch('https://api.edamam.com/api/recipes/v2?type=public&q=drink&app_id=9631526f&app_key=d26b50691432dfec98de8de1a0f1eeb7');
+        const response = await fetch('https://api.edamam.com/api/recipes/v2?type=public&q=juice&app_id=9631526f&app_key=d26b50691432dfec98de8de1a0f1eeb7');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
 
         const data = await response.json();
         setRecipes(data.hits);
+        console.log(data.hits)
+        // setRecipes(response.data); 
       } catch (error) {
         console.error('Error fetching recipes:', error);
       }
     };
 
+    // Call the fetchRecipes function
     fetchRecipes();
-  }, [])
+  },[])
 
   return (
     <NativeBaseProvider>
@@ -53,29 +60,23 @@ const RecipeListScreen = () => {
 
         {/* Categories filter */}
         <Box mt={-270}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <Box>
-              <Text fontSize={22} fontWeight="bold">
-                Categories
-              </Text>
-              {/* Categories list */}
-              <CategoriesFilter />
-            </Box>
-          </ScrollView>
+          <Text fontSize={22} fontWeight="bold">
+            Categories
+          </Text>
+          {/* Categories list */}
+          <CategoriesFilter />
         </Box>
 
         {/* Recipe List Filter */}
         <Box flex={1} mt={5}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <Box>
-              <Text fontSize={22} fontWeight="bold">
-                Recipes
-              </Text>
-              {/* Recipes list */}
-              <RecipeCard recipes={recipes} />
-            </Box>
-          </ScrollView>
+          <Text fontSize={22} fontWeight="bold">
+            Recipes
+          </Text>
+
+          {/* Recipes list */}
+          <RecipeCard recipes={recipes} />
         </Box>
+
       </SafeAreaView>
     </NativeBaseProvider>
   );

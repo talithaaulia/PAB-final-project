@@ -9,16 +9,14 @@ import WelcomeScreen from "../screens/WelcomeScreen";
 import RecipeListScreen from "../screens/RecipeListScreen";
 import RecipeDetailsScreen from "../screens/RecipeDetailsScreen";
 import info from "../screens/info";
-import StarRating from "../screens/StarRating";
 import FavoriteScreen from "../screens/FavoriteScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SearchScreen from "../screens/SearchScreen";
 import BeverageScreen from "../screens/BeverageScreen";
 import News from "../screens/News";
 import list from "../screens/list";
-import RecipeForm from "../screens/RecipeForm";
 import SplashScreen from "../screens/splash";
-import ReviewScreen from "../screens/review";
+
 
 
 
@@ -40,15 +38,13 @@ const AppNavigator = () => {
 				<Stack.Screen name="tentangkami" component={tentangkami} />
 				<Stack.Screen name="FAQ" component={FAQ} />
 				<Stack.Screen name="info" component={info} />
-				<Stack.Screen name="StarRating" component={StarRating} />
 				<Stack.Screen name="Favorite" component={FavoriteScreen} />
 				<Stack.Screen name="profile" component={ProfileScreen} />
 				<Stack.Screen name="Search" component={SearchScreen}/>
 				<Stack.Screen name="Beverage" component={BeverageScreen}/>
 				<Stack.Screen name="News" component={News}/>
 				<Stack.Screen name="list" component={list}/>
-				<Stack.Screen name="RecipeForm" component={RecipeForm}/>
-				<Stack.Screen name="ReviewScreen" component={ReviewScreen}/>
+	
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
