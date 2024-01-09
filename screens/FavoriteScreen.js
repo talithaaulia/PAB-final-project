@@ -1,262 +1,61 @@
-import React from "react";
-import { NativeBaseProvider, HStack, Text, Box, ScrollView, Pressable, Image } from "native-base";
-import { FontAwesome } from "@expo/vector-icons";
+import React, { useEffect, useState } from "react";
+import { SafeAreaView, ScrollView, Pressable } from "react-native";
+import { Box, NativeBaseProvider, Text, Icon } from "native-base";
+import RecipeCard from "../components/RecipeCard";
 import { useNavigation } from "@react-navigation/native";
+import { FontAwesome } from "@expo/vector-icons";
 
-const FavoriteScreen = ({ }) => {
+const TrendingRecipesScreen = () => {
+  const [trendingRecipes, setTrendingRecipes] = useState([]);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchTrendingRecipes = async () => {
+      try {
+        const response = await fetch('https://api.edamam.com/api/recipes/v2?type=public&q=croissant&app_id=9631526f&app_key=d26b50691432dfec98de8de1a0f1eeb7');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        setTrendingRecipes(data.hits);
+      } catch (error) {
+        console.error('Error fetching trending recipes:', error);
+      }
+    };
+
+    fetchTrendingRecipes();
+  }, []);
+
+  const handleBack = () => {
+    navigation.goBack();
+  };
 
   return (
     <NativeBaseProvider>
-      <Box marginTop={50} px={10}>
-        <HStack justifyContent="space-between" alignItems="center" mb={4}>
-          <Pressable onPress={() => navigation.goBack()}>
-            <FontAwesome name={"arrow-circle-left"} size={28} color="" />
+      <SafeAreaView flex={1} marginHorizontal={18}>
+        {/* Trending Recipe List Filter */}
+        <Box flex={1} mt={20}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <Box>
+              <Text fontSize={22} fontWeight="bold">
+
+                Resep yang Trending
+              </Text>
+              {/* Trending Recipes list */}
+              <RecipeCard recipes={trendingRecipes} />
+            </Box>
+          </ScrollView>
+        </Box>
+
+        <Box flex={1} position="absolute" top={10} left={100} bgColor="white">
+          <Pressable onPress={handleBack}>
+            <Icon as={FontAwesome} name="arrow-circle-left" size="28" color="#f96163" />
           </Pressable>
-        </HStack>
-
-        <Text textAlign="center" fontWeight="bold" fontSize={20} mb={4}>
-          Favorite
-        </Text>
-
-        <ScrollView mb={100}>
-
-		{/* LASAGNA  */}
-			<Box
-				flexDirection="row"
-				justifyContent="space-between"
-				alignItems="center"
-				bgColor="#fff"
-				borderRadius={8}
-				shadowColor="#000"
-				shadowOpacity={0.2}
-				shadowOffset={{ width: 0, height: 2 }}
-				shadowRadius={4}
-				p={4}
-				mb={2}
-			>
-				<Image
-					source={require("../assets/images/lasgana.png")} alt="lasagna"
-					w={70} h={70} borderRadius={35} mr={2}
-				/>
-				<Box flex={1} mr={8}>
-						<Text fontSize={18} fontWeight="bold" ml={2}>
-							Lazagna
-						</Text>
-						<HStack mt={2} ml={2}>
-							<Text>40 Menit</Text>
-							<Text mx={1}> | </Text>
-							<HStack>
-								<Text mr={4}>4.2</Text>
-								<FontAwesome
-									name="star"
-									size={16}
-									color="#f96163"
-								/>
-							</HStack>
-						</HStack>
-				</Box>
-				 <Box flexDirection="row" alignItems="center"></Box>
-			</Box>
-
-		{/* TUNA */}
-			<Box
-				flexDirection="row"
-				justifyContent="space-between"
-				alignItems="center"
-				bgColor="#fff"
-				borderRadius={8}
-				shadowColor="#000"
-				shadowOpacity={0.2}
-				shadowOffset={{ width: 0, height: 2 }}
-				shadowRadius={4}
-				p={4}
-				mb={2}
-				mt={2}
-			>
-				<Image
-					source={require("../assets/images/tuna.png")}  alt="tuna"
-					w={70} h={70} borderRadius={35} mr={2}
-				/>
-				<Box flex={1} mr={8}>
-						<Text fontSize={18} fontWeight="bold" ml={2}>
-							Tuna
-						</Text>
-						<HStack mt={2} ml={2}>
-							<Text>40 Menit</Text>
-							<Text mx={1}> | </Text>
-							<HStack>
-								<Text mr={4}>4.2</Text>
-								<FontAwesome
-									name="star"
-									size={16}
-									color="#f96163"
-								/>
-							</HStack>
-						</HStack>
-				</Box>
-				 <Box flexDirection="row" alignItems="center"></Box>
-			</Box>
-
-		{/* CUPCAKE */}
-			<Box
-				flexDirection="row"
-				justifyContent="space-between"
-				alignItems="center"
-				bgColor="#fff"
-				borderRadius={8}
-				shadowColor="#000"
-				shadowOpacity={0.2}
-				shadowOffset={{ width: 0, height: 2 }}
-				shadowRadius={4}
-				p={4}
-				mb={2}
-				mt={2}
-			>
-				<Image
-					source={require("../assets/images/cupcakes.png")} alt="cupcake"
-					w={70} h={70} borderRadius={35} mr={2}
-				/>
-				<Box flex={1} mr={8}>
-						<Text fontSize={18} fontWeight="bold" ml={2}>
-							Cupcake
-						</Text>
-						<HStack mt={2} ml={2}>
-							<Text>60 Menit</Text>
-							<Text mx={1}> | </Text>
-							<HStack>
-								<Text mr={4}>5</Text>
-								<FontAwesome
-									name="star"
-									size={16}
-									color="#f96163"
-								/>
-							</HStack>
-						</HStack>
-				</Box>
-				 <Box flexDirection="row" alignItems="center"></Box>
-			</Box>
-
-		{/* AYAM GEPREK */}
-			<Box
-				flexDirection="row"
-				justifyContent="space-between"
-				alignItems="center"
-				bgColor="#fff"
-				borderRadius={8}
-				shadowColor="#000"
-				shadowOpacity={0.2}
-				shadowOffset={{ width: 0, height: 2 }}
-				shadowRadius={4}
-				p={4}
-				mb={2}
-				mt={2}
-			>
-				<Image
-					source={require("../assets/images/chicken.png")} alt="ayam geprek"
-					w={70} h={70} borderRadius={35} mr={2}
-				/>
-				<Box flex={1} mr={8}>
-						<Text fontSize={18} fontWeight="bold" ml={2}>
-							Ayam Geprek
-						</Text>
-						<HStack mt={2} ml={2}>
-							<Text>45 Menit</Text>
-							<Text mx={1}> | </Text>
-							<HStack>
-								<Text mr={4}>4.2</Text>
-								<FontAwesome
-									name="star"
-									size={16}
-									color="#f96163"
-								/>
-							</HStack>
-						</HStack>
-				</Box>
-				 <Box flexDirection="row" alignItems="center"></Box>
-			</Box>
-
-		{/* RAMEN */}
-			<Box
-				flexDirection="row"
-				justifyContent="space-between"
-				alignItems="center"
-				bgColor="#fff"
-				borderRadius={8}
-				shadowColor="#000"
-				shadowOpacity={0.2}
-				shadowOffset={{ width: 0, height: 2 }}
-				shadowRadius={4}
-				p={4}
-				mb={2}
-				mt={2}
-			>
-				<Image
-					source={require("../assets/images/ramen-org.png")} alt="ramen"
-					w={70} h={70} borderRadius={35} mr={2}
-				/>
-				<Box flex={1} mr={8}>
-						<Text fontSize={18} fontWeight="bold" ml={2}>
-							Ramen
-						</Text>
-						<HStack mt={2} ml={2}>
-							<Text>35 Menit</Text>
-							<Text mx={1}> | </Text>
-							<HStack>
-								<Text mr={4}>4.2</Text>
-								<FontAwesome
-									name="star"
-									size={16}
-									color="#f96163"
-								/>
-							</HStack>
-						</HStack>
-				</Box>
-				 <Box flexDirection="row" alignItems="center"></Box>
-			</Box>
-
-		{/* HOTDOG */}
-			<Box
-				flexDirection="row"
-				justifyContent="space-between"
-				alignItems="center"
-				bgColor="#fff"
-				borderRadius={8}
-				shadowColor="#000"
-				shadowOpacity={0.2}
-				shadowOffset={{ width: 0, height: 2 }}
-				shadowRadius={4}
-				p={4}
-				mb={2}
-				mt={2}
-			>
-				<Image
-					source={require("../assets/images/hotdog.png")} alt="Hotdog"
-					w={70} h={70} borderRadius={35} mr={2}
-				/>
-				<Box flex={1} mr={8}>
-						<Text fontSize={18} fontWeight="bold" ml={2}>
-							Hotdog
-						</Text>
-						<HStack mt={2} ml={2}>
-							<Text>40 Menit</Text>
-							<Text mx={1}> | </Text>
-							<HStack>
-								<Text mr={4}>4.6</Text>
-								<FontAwesome
-									name="star"
-									size={16}
-									color="#f96163"
-								/>
-							</HStack>
-						</HStack>
-				</Box>
-				 <Box flexDirection="row" alignItems="center"></Box>
-			</Box>
-        </ScrollView>
-      </Box>
+        </Box>
+      </SafeAreaView>
     </NativeBaseProvider>
   );
 };
 
-export default FavoriteScreen;
+export default TrendingRecipesScreen;
