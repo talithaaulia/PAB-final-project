@@ -16,17 +16,19 @@ const Header = ({ headerText, headerIcon }) => {
         </Text>
 
         <FontAwesome
-          name={headerIcon}
+          name= "fire"
           size={24}
           color="#f96163"
           mr={30}
           onPress={() => navigation.navigate("Favorite")}
         />
-        <Text ml={5} mt={1} onPress={() => navigation.navigate('profile')}>
-          Profile
-        </Text>
+        <Text ml={5} mt={1} onPress={() => navigation.navigate('Profile')}>
         <FontAwesome
-        />
+            name="user-circle"
+            size={24}
+            color="#f96163"
+          />
+    </Text>
         <Text ml={10} mt={1} onPress={() => navigation.navigate('News')}>
           <FontAwesome
             name="newspaper-o"

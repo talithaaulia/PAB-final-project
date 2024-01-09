@@ -14,6 +14,10 @@ const ProfileScreen = ({ }) => {
         navigation.replace("Welcome");
     };
 
+    const recipe = () => {
+        navigation.navigate('RecipeList');
+    };
+
     useEffect(() => {
         const fetchUserData = async () => {
           try {
@@ -49,19 +53,25 @@ const ProfileScreen = ({ }) => {
                     </Pressable>
                 </Box>
 
+                    {userData && (
+                    <Box bg="white" borderWidth={1} borderRadius={10} p={5} alignItems="center" flexDirection="column" mt={20}>
+                    <FontAwesome name="user-circle" size={70} color="#f96163" />
+                    <Text mt={5}>{userData.fullName}
+                    </Text>
+                    </Box>
+                )}
                 {userData && (
-                <Box bg="white" borderWidth={1} borderRadius={10} p={5} alignItems="center" flexDirection="column" mt={20}>
-                    <Image borderRadius={100} backgroundColor="white" padding={10} source={require("../assets/images/avatar.png")} />
-                    <Text mt={5}>{userData.fullName}</Text>
+                <Box mt={10} p={7} bg="#f96163" borderWidth={1} borderRadius={10} gap={3} flexDirection="column" mb={5}>
+                    <Text color="white">Email: {userData.email}</Text>
+                    <Text color="white">Gender: {userData.gender}</Text>
                 </Box>
                 )}
 
-                <Box mt={10} p={7} bg="#f96163" borderWidth={1} borderRadius={10} gap={3} flexDirection="column">
-                    <Text color="white">Email : {userData.email}</Text>
-                    <Text color="white">Gender : {userData.gender}</Text>
-                </Box>
-                
-                <Button onPress={handleLogout} bg="#f96163">
+                <Button onPress={recipe} bg="rose.200" borderWidth={1} borderRadius={10} mt={10}>
+                    <Text color="#f96163">Lihat Resep</Text>
+                </Button>
+
+                <Button onPress={handleLogout} bg="#f96163" borderWidth={1} borderRadius={10} mt={5}>
                     Logout
                 </Button>
             </Box>
@@ -70,4 +80,3 @@ const ProfileScreen = ({ }) => {
 };
 
 export default ProfileScreen;
-
