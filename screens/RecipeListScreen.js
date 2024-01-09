@@ -12,7 +12,7 @@ const RecipeListScreen = () => {
   const [recipes, setRecipes] = React.useState([]);
 
   const handleSearchBarClick = () => {
-    navigation.navigate("Search");
+    navigation.navigate("Search"); 
   };
 
   React.useEffect(() => {
